@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const data = require('./data');
 const bot = require('./bot').bot;
 
+const PORT = process.env.port || 3000;
+
 const app = express();
 
 app.use(morgan('dev'));
@@ -16,6 +18,6 @@ app.get('/', async (req, res, next) => {
 	res.send(result);
 });
 
-app.listen(3000, (req, res, next) => {
+app.listen(PORT, (req, res, next) => {
 	console.log('Server listening on port 3000');
 });
