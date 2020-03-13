@@ -9,7 +9,7 @@ const all = async () => {
 const country = async country => {
 	let data = await covid.countries();
 	for (let entry of data) {
-		if (entry.country === country) {
+		if (entry.country.toLowerCase() === country.toLowerCase()) {
 			return entry;
 		}
 	}
