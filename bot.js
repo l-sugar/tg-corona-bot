@@ -34,6 +34,8 @@ bot.on('message', async msg => {
 
 🎉Total recovered: <b>${countryData.recovered}</b>
 😷Currently in critical condition: <b>${countryData.critical}</b>`)
+			: msg.text.indexOf('/') == 0
+			? false
 			: (msgText = 'Invalid Input, please try again');
 
 		bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
