@@ -13,5 +13,5 @@ const app = express();
 app.use(morgan('dev'));
 
 app.listen(PORT, (req, res, next) => {
-	console.log('Server listening on port 3000');
+	console.log(`Server listening on port ${PORT}`);
 });
