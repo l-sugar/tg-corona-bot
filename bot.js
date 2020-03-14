@@ -35,6 +35,7 @@ What country would you like to get up-to-date CoViD19 numbers for first?`
 🎉Total recovered: <b>${data.recovered}</b>
 `)
 				: false;
+			bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
 		} catch (err) {
 			console.log(err);
 		}
