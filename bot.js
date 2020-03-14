@@ -18,7 +18,12 @@ bot.on('message', async msg => {
         
 What country would you like to get up-to-date CoViD19 numbers for first?`
 		);
-	} else if (text == ('world' || 'international' || 'all' || 'everywhere')) {
+	} else if (
+		text === 'world' ||
+		text === 'international' ||
+		text === 'all' ||
+		text === 'everywhere'
+	) {
 		try {
 			let data = await data.all;
 			let msgText;
