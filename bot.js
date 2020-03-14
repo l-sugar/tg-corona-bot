@@ -10,7 +10,7 @@ const bot = new telegramBot(token, { polling: true });
 
 bot.on('message', async msg => {
 	const chatId = msg.chat.id;
-	const text = msg.text;
+	const text = msg.text.toLowerCase();
 	if (text == '/start') {
 		bot.sendMessage(
 			msg.chat.id,
@@ -18,6 +18,21 @@ bot.on('message', async msg => {
         
 What country would you like to get up-to-date CoViD19 numbers for first?`
 		);
+	} else if (text == ('world' || 'international' || 'all' || 'everywhere')) {
+		try {
+			let data = await data.all;
+			let msgText;
+			data
+				? (msgText = `<b><u>World Stats</u></b>
+
+😷Total cases reported: <b>${data.cases}</b>
+😵Total deaths reported: <b>${data.deaths}</b>
+🎉Total recovered: <b>${data.recovered}</b>
+`)
+				: false;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	try {
