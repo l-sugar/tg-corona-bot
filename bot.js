@@ -18,34 +18,23 @@ bot.on('message', async msg => {
         
 What country would you like to get up-to-date CoViD19 numbers for first?`
 		);
-	} else if (
-		text === 'world' ||
-		text === 'international' ||
-		text === 'all' ||
-		text === 'everywhere'
-	) {
-		try {
-			let result = await data.all;
-			let msgText;
-			result
-				? (msgText = `<b><u>World Stats</u></b>
-
-😷Total cases reported: <b>${result.cases}</b>
-😵Total deaths reported: <b>${result.deaths}</b>
-🎉Total recovered: <b>${result.recovered}</b>
-`)
-				: false;
-			bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
-		} catch (err) {
-			console.log(err);
-		}
 	}
 
 	try {
-		let countryData = await data.country(text);
 		let msgText;
-		countryData
-			? (msgText = `<b><u>${countryData.country}</u></b>
+		let worldArguments = ['world', 'international', 'all', 'everywhere'];
+		if (worldArguments.includes(text)) {
+			let worldData = await data.all();
+			msgText = `<b><u>World Stats</u></b>
+
+ 😷Total cases reported: <b>${worldData.cases}</b>
+ 😵Total deaths reported: <b>${worldData.deaths}</b>
+ 🎉Total recovered: <b>${worldData.recovered}</b>
+            `;
+		} else {
+			let countryData = await data.country(text);
+			countryData
+				? (msgText = `<b><u>${countryData.country}</u></b>
 
 😷Total cases reported: <b>${countryData.cases}</b>
 🤒New cases today: <b>${countryData.todayCases}</b>
@@ -55,9 +44,10 @@ What country would you like to get up-to-date CoViD19 numbers for first?`
 
 🎉Total recovered: <b>${countryData.recovered}</b>
 😷Currently in critical condition: <b>${countryData.critical}</b>`)
-			: msg.text.indexOf('/') == 0
-			? false
-			: (msgText = 'Invalid Input, please try again');
+				: msg.text.indexOf('/') == 0
+				? false
+				: (msgText = 'Invalid Input, please try again');
+		}
 
 		bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
 	} catch (err) {
