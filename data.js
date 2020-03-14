@@ -3,7 +3,7 @@ const util = require('util');
 const covid = require('novelcovid');
 
 const all = async () => {
-	await covid.all();
+	return await covid.all();
 };
 
 const country = async country => {
