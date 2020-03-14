@@ -8,17 +8,17 @@ const token = process.env.TG_BOT_TOKEN;
 
 const bot = new telegramBot(token, { polling: true });
 
-bot.onText(/\/start/, msg => {
-	bot.sendMessage(
-		msg.chat.id,
-		`Welcome ${msg.from.first_name}!
-    
-What country would you like to get up-to-date CoViD19 numbers for first?`
-	);
-});
 bot.on('message', async msg => {
 	const chatId = msg.chat.id;
 	const text = msg.text;
+	if (text == '/start') {
+		bot.sendMessage(
+			msg.chat.id,
+			`Welcome ${msg.from.first_name}!
+        
+What country would you like to get up-to-date CoViD19 numbers for first?`
+		);
+	}
 
 	try {
 		let countryData = await data.country(text);
