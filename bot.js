@@ -25,14 +25,14 @@ What country would you like to get up-to-date CoViD19 numbers for first?`
 		text === 'everywhere'
 	) {
 		try {
-			let data = await data.all;
+			let result = await data.all;
 			let msgText;
-			data
+			result
 				? (msgText = `<b><u>World Stats</u></b>
 
-😷Total cases reported: <b>${data.cases}</b>
-😵Total deaths reported: <b>${data.deaths}</b>
-🎉Total recovered: <b>${data.recovered}</b>
+😷Total cases reported: <b>${result.cases}</b>
+😵Total deaths reported: <b>${result.deaths}</b>
+🎉Total recovered: <b>${result.recovered}</b>
 `)
 				: false;
 			bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
