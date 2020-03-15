@@ -25,10 +25,9 @@ app.listen(PORT, (req, res, next) => {
 - connect database
 - persist daily data in database (cron jobs)
 - display historical data in the bot responses
-- more bot commands:
- - world
- - 
 - create frontend to get the data via url
+
+JOHN HOPKINS DATA REPO WITH HISTORICAL DATA: https://github.com/CSSEGISandData/COVID-19/
 
 
 */

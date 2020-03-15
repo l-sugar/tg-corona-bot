@@ -9,6 +9,9 @@ const token = process.env.TG_BOT_TOKEN;
 const bot = new telegramBot(token, { polling: true });
 
 bot.on('message', async msg => {
+	console.log(
+		`received message from ${msg.from.first_name} ${msg.from.last_name}: ${msg.text}`
+	);
 	const chatId = msg.chat.id;
 	const text = msg.text.toLowerCase();
 	if (text == '/start') {
