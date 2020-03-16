@@ -21,6 +21,7 @@ bot.on('message', async msg => {
         
 What country would you like to get up-to-date CoViD19 numbers for first?`
 		);
+		return;
 	}
 
 	try {
