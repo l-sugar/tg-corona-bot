@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@louis.sugar/covid19": "^1.0.4",
     "autocorrect": "^1.2.0",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
