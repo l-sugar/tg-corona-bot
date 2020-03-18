@@ -50,7 +50,7 @@ What country would you like to get up-to-date CoViD19 numbers for first?`
 😷Currently in critical condition: <b>${countryData.critical}</b>`)
 				: msg.text.indexOf('/') == 0
 				? false
-				: (msgText = 'Invalid Input, please try again');
+				: (msgText = 'API is down, try again later');
 		}
 
 		bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
