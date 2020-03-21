@@ -1,17 +1,17 @@
 const axios = require('axios');
 const util = require('util');
-const covid = require('@louis.sugar/covid19');
+const covid = require('novelcovid');
 
 const all = async () => {
 	return await covid.all();
 };
 
 const country = async country => {
-	let data = await covid.countries(country);
-	if (data) {
+	try {
+		let data = await covid.countries(country);
 		return data;
-	} else {
-		return false;
+	} catch (err) {
+		throw err;
 	}
 };
 

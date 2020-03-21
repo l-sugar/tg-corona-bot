@@ -17,6 +17,6 @@
     "morgan": "^1.9.1",
     "node-telegram-bot-api": "^0.40.0",
     "nodemon": "^2.0.2",
-    "novelcovid": "^1.0.4"
+    "novelcovid": "^1.0.5"
   }
 }

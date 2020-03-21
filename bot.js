@@ -37,8 +37,7 @@ What country would you like to get up-to-date CoViD19 numbers for first?`
             `;
 		} else {
 			let countryData = await data.country(text);
-			countryData && typeof countryData !== 'string'
-				? (msgText = `<b><u>${countryData.country}</u></b>
+			msgText = `<b><u>${countryData.country}</u></b>
 
 😷Total cases reported: <b>${countryData.cases}</b>
 🤒New cases today: <b>${countryData.todayCases}</b>
@@ -47,15 +46,13 @@ What country would you like to get up-to-date CoViD19 numbers for first?`
 💀New deaths today: <b>${countryData.todayDeaths}</b>
 
 🎉Total recovered: <b>${countryData.recovered}</b>
-😷Currently in critical condition: <b>${countryData.critical}</b>`)
-				: msg.text.indexOf('/') == 0
-				? false
-				: (msgText = 'Invalid Input, please try again');
+😷Currently in critical condition: <b>${countryData.critical}</b>`;
 		}
 
 		bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
 	} catch (err) {
-		console.error(err);
+		console.log(err.error);
+		bot.sendMessage(chatId, err.error);
 	}
 });
 
