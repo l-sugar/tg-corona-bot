@@ -16,7 +16,7 @@ const country = async country => {
 		let data = await fetch(`https://corona.lmao.ninja/countries/${country}`);
 		return data.json();
 	} catch (err) {
-		console.error(err);
+		console.error('error: ' + util.inspect(err));
 		return err;
 	}
 };
