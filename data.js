@@ -9,6 +9,7 @@ const all = async () => {
 const country = async country => {
 	try {
 		let data = await covid.countries(country);
+		console.log('received data from api: ' + util.inspect(data));
 		return data;
 	} catch (err) {
 		throw err;
