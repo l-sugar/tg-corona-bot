@@ -37,7 +37,6 @@ What country would you like to get up-to-date CoViD19 numbers for first?`
             `;
 		} else {
 			let countryData = await data.country(text);
-			console.log('reading out data: ' + util.inspect(countryData));
 			msgText = `<b><u>${countryData.country}</u></b>
 
 😷Total cases reported: <b>${countryData.cases}</b>

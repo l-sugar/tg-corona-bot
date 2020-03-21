@@ -1,19 +1,23 @@
 const axios = require('axios');
 const util = require('util');
-const covid = require('novelcovid');
+const fetch = require('node-fetch');
 
 const all = async () => {
-	return await covid.all();
+	fetch('https://corona.lmao.ninja/all')
+		.then(res => {
+			return res.json();
+		})
+		.catch(err => console.log(err));
 };
 
 const country = async country => {
-	try {
-		let data = await covid.countries(country);
-		console.log('received data from api: ' + util.inspect(data));
-		return data;
-	} catch (err) {
-		throw err;
-	}
+	fetch(`https://corona.lmao.ninja/countries/${country}`)
+		.then(res => {
+			return res.json();
+		})
+		.catch(err => {
+			return err;
+		});
 };
 
 module.exports = {
