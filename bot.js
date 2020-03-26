@@ -33,21 +33,23 @@ const countryResponse = async (chatId, country) => {
 	console.log(
 		`now in countryResponse function, passing in country: ${country}`
 	);
-	let countryData = data.country(country);
-	console.log(
-		`got response from data fetch: ${util.inspect(await countryData)}`
-	);
-	let msgText = `<b><u>${countryData.country}</u></b>
+	data
+		.country(country)
+		.then(result => console.log(`countryResponse received result: ${result}`))
+		.then(res => {
+			let msgText = `<b><u>${res.country}</u></b>
 
-😷Total cases reported: <b>${countryData.cases}</b>
-🤒New cases today: <b>${countryData.todayCases}</b>
+😷Total cases reported: <b>${res.cases}</b>
+🤒New cases today: <b>${res.todayCases}</b>
 	
-😵Total deaths reported: <b>${countryData.deaths}</b>
-💀New deaths today: <b>${countryData.todayDeaths}</b>
+😵Total deaths reported: <b>${res.deaths}</b>
+💀New deaths today: <b>${res.todayDeaths}</b>
 	
-🎉Total recovered: <b>${countryData.recovered}</b>
-😷Currently in critical condition: <b>${countryData.critical}</b>`;
-	bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
+🎉Total recovered: <b>${res.recovered}</b>
+😷Currently in critical condition: <b>${res.critical}</b>`;
+
+			bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
+		});
 };
 
 // Bot Handler
@@ -65,13 +67,13 @@ bot.on('message', async msg => {
 	try {
 		let worldArguments = ['world', 'international', 'all', 'everywhere'];
 		if (worldArguments.includes(text)) {
-			worldResponse(chatId);
+			await worldResponse(chatId);
 			return;
 		}
 		console.log(
 			`have received message for country function, passing in text: ${text}`
 		);
-		countryResponse(chatId, text);
+		await countryResponse(chatId, text);
 		return;
 	} catch (err) {
 		console.log(err.error);
