@@ -1,10 +1,11 @@
 const axios = require('axios');
 const util = require('util');
 const fetch = require('node-fetch');
+const covid = require('novelcovid');
 
 const all = async () => {
 	try {
-		let data = fetch('https://corona.lmao.ninja/all');
+		let data = await covid.all();
 		return data.json();
 	} catch (err) {
 		console.error(err);
@@ -13,11 +14,10 @@ const all = async () => {
 
 const country = async country => {
 	try {
-		let data = await fetch(`https://corona.lmao.ninja/countries/${country}`);
+		let data = await covid.countries(country);
 		return data.json();
 	} catch (err) {
-		console.error('error: ' + util.inspect(err));
-		return err;
+		console.error(err);
 	}
 };
 
