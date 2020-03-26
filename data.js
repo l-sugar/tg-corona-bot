@@ -13,14 +13,14 @@ const all = async () => {
 
 const country = country => {
 	if (!country) {
-		fetch(`https://corona.lmao.ninja/countries`)
+		return await fetch(`https://corona.lmao.ninja/countries`)
 			.then(data => data.json())
 			.then(result => {
 				return result;
 			})
 			.catch(err => console.error(err));
 	}
-	fetch(`https://corona.lmao.ninja/countries/${country}`)
+	return await fetch(`https://corona.lmao.ninja/countries/${country}`)
 		.then(data => data.json())
 		.then(result => {
 			return result;
