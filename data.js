@@ -22,7 +22,6 @@ const country = country => {
 	}
 	fetch(`https://corona.lmao.ninja/countries/${country}`)
 		.then(data => data.json())
-		.then(stuff => console.log(`received data: ${util.inspect(stuff)}`))
 		.then(result => {
 			return result;
 		})
