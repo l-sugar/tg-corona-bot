@@ -13,13 +13,13 @@ const all = async () => {
 };
 
 const country = async country => {
-	try {
-		let data = covid.countries(country);
-		console.log(`have received data: ${util.inspect(data)}`);
-		return data;
-	} catch (err) {
-		console.error(err);
-	}
+	covid
+		.countries(country)
+		.then(data => {
+			console.log(`have received data: ${util.inspect(data)}`);
+			return data;
+		})
+		.catch(err => console.error(err));
 };
 
 module.exports = {
