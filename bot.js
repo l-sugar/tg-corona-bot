@@ -33,12 +33,8 @@ const countryResponse = async (chatId, country) => {
 	console.log(
 		`now in countryResponse function, passing in country: ${country}`
 	);
-	let countryData = await data.country(country);
-	if (countryData.error) {
-		console.error(countryData.error);
-		bot.sendMessage(chatId, countryData.error);
-		return;
-	}
+	let countryData = data.country(country);
+	console.log(`got response from data fetch: ${util.inspect(countryData)}`);
 	let msgText = `<b><u>${countryData.country}</u></b>
 
 😷Total cases reported: <b>${countryData.cases}</b>
