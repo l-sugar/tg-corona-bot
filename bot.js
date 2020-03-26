@@ -33,9 +33,9 @@ const countryResponse = async (chatId, country) => {
 	console.log(
 		`now in countryResponse function, passing in country: ${country}`
 	);
-	data
+
+	await data
 		.country(country)
-		.then(result => console.log(`countryResponse received result: ${result}`))
 		.then(res => {
 			let msgText = `<b><u>${res.country}</u></b>
 
