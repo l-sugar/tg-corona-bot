@@ -11,7 +11,7 @@ const all = async () => {
 		});
 };
 
-const country = country => {
+const country = async country => {
 	if (!country) {
 		return await fetch(`https://corona.lmao.ninja/countries`)
 			.then(data => data.json())
