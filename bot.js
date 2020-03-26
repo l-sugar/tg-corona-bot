@@ -49,7 +49,7 @@ const countryResponse = async (chatId, country) => {
 😷Currently in critical condition: <b>${res.critical}</b>`;
 
 			bot.sendMessage(chatId, msgText, { parse_mode: 'HTML' });
-		});
+		}).catch((err) => console.log(err);
 };
 
 // Bot Handler
