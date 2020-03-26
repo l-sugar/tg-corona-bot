@@ -67,13 +67,13 @@ bot.on('message', async msg => {
 	try {
 		let worldArguments = ['world', 'international', 'all', 'everywhere'];
 		if (worldArguments.includes(text)) {
-			await worldResponse(chatId);
+			worldResponse(chatId);
 			return;
 		}
 		console.log(
 			`have received message for country function, passing in text: ${text}`
 		);
-		await countryResponse(chatId, text);
+		countryResponse(chatId, text);
 		return;
 	} catch (err) {
 		console.log(err.error);
