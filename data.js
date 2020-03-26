@@ -15,6 +15,7 @@ const all = async () => {
 const country = async country => {
 	try {
 		let data = covid.countries(country);
+		console.log(`have received data: ${util.inspect(data)}`);
 		return data;
 	} catch (err) {
 		console.error(err);
