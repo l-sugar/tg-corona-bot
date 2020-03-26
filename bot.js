@@ -30,6 +30,9 @@ const worldResponse = async chatId => {
 };
 
 const countryResponse = async (chatId, country) => {
+	console.log(
+		`now in countryResponse function, passing in country: ${country}`
+	);
 	let countryData = await data.country(country);
 	if (countryData.error) {
 		console.error(countryData.error);
@@ -67,6 +70,9 @@ bot.on('message', async msg => {
 			await worldResponse(chatId);
 			return;
 		}
+		console.log(
+			`have received message for country function, passing in text: ${text}`
+		);
 		await countryResponse(chatId, text);
 		return;
 	} catch (err) {
