@@ -4,25 +4,28 @@ const fetch = require('node-fetch');
 const covid = require('novelcovid');
 
 const all = async () => {
-	try {
-		let data = covid.all();
-		return data;
-	} catch (err) {
-		console.error(err);
-	}
+	fetch('https://corona.lmao.ninja/all')
+		.then(data => data.json())
+		.then(result => {
+			return result;
+		});
 };
 
 const country = async country => {
-	console.log(
-		`have received country, now passing into covid package: ${country}`
-	);
-	covid
-		.countries(country)
-		.then(data => {
-			console.log(`have received data: ${util.inspect(data)}`);
-			return data;
+	if (!country) {
+		fetch(`https://corona.lmao.ninja/countries`)
+			.then(data => data.json())
+			.then(result => {
+				return result;
+			})
+			.catch(err => console.error(err));
+	}
+	fetch(`https://corona.lmao.ninja/countries/${country}`)
+		.then(data => data.json())
+		.then(result => {
+			return result;
 		})
-		.catch(err => console.error(`ran into error when retrieving data: ${err}`));
+		.catch(err => console.error(err));
 };
 
 module.exports = {
