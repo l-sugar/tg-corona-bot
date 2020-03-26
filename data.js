@@ -5,8 +5,8 @@ const covid = require('novelcovid');
 
 const all = async () => {
 	try {
-		let data = await covid.all();
-		return data.json();
+		let data = covid.all();
+		return await data.json();
 	} catch (err) {
 		console.error(err);
 	}
@@ -14,8 +14,8 @@ const all = async () => {
 
 const country = async country => {
 	try {
-		let data = await covid.countries(country);
-		return data.json();
+		let data = covid.countries(country);
+		return await data.json();
 	} catch (err) {
 		console.error(err);
 	}
