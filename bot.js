@@ -34,7 +34,9 @@ const countryResponse = async (chatId, country) => {
 		`now in countryResponse function, passing in country: ${country}`
 	);
 	let countryData = data.country(country);
-	console.log(`got response from data fetch: ${util.inspect(countryData)}`);
+	console.log(
+		`got response from data fetch: ${util.inspect(await countryData)}`
+	);
 	let msgText = `<b><u>${countryData.country}</u></b>
 
 😷Total cases reported: <b>${countryData.cases}</b>
