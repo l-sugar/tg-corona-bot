@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const covid = require('novelcovid');
 
 const all = async () => {
-	fetch('https://corona.lmao.ninja/all')
+	return await fetch('https://corona.lmao.ninja/all')
 		.then(data => data.json())
 		.then(result => {
 			return result;
