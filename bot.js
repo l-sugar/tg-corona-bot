@@ -3,20 +3,45 @@ const dotenv = require('dotenv').config();
 const util = require('util');
 
 const data = require('./data');
+const database = require('./database');
+const userCache = require('./user-cache');
 
 const token = process.env.TG_BOT_TOKEN;
 
 const bot = new telegramBot(token, { polling: true });
 
-// Bot Functions
+// Bot Handler Functions
 
-const welcomeMessage = (chatId, firstName) => {
+const startHandler = async (chatId, firstName, username) => {
+	let telegramUser = {
+		id: chatId,
+		username: username,
+		firstname: firstName
+	};
+
+	await database.insertUserIntoDatabase(telegramUser);
+	userCache.set(telegramUser.id, telegramUser);
+	console.log(`keys in userCache: ${userCache.list()}`);
+
 	bot.sendMessage(
 		chatId,
 		`Welcome ${firstName}!
         
-	What country would you like to get up-to-date CoViD19 numbers for first?`
+What country would you like to get up-to-date CoViD19 numbers for first?`
 	);
+};
+
+const helpHandler = chatId => {
+	bot.sendMessage(
+		chatId,
+		`To get the current CoviD-19 numbers for a specific country, just send me the country's name in english.
+To get the worldwide numbers, send 'world'.
+If you have questions or feedback, reach out to my creator @louissugar`
+	);
+};
+
+const settingsHandler = (chatId, telegramUser) => {
+	bot.sendMessage(chatId, `work in progress`);
 };
 
 const worldResponse = async chatId => {
@@ -60,24 +85,36 @@ bot.on('message', async msg => {
 	);
 	const chatId = msg.chat.id;
 	const text = msg.text.toLowerCase();
-	if (text == '/start') {
-		welcomeMessage(chatId, msg.from.first_name);
-		return;
-	}
+	const telegramUser = {};
 
-	try {
-		let worldArguments = ['world', 'international', 'all', 'everywhere'];
-		if (worldArguments.includes(text)) {
-			await worldResponse(chatId);
-			return;
-		}
-		console.log(
-			`have received message for country function, passing in text: ${text}`
-		);
-		await countryResponse(chatId, text);
-		return;
-	} catch (err) {
-		console.log(err.error);
+	switch (text) {
+		case '/start':
+			startHandler(chatId, msg.from.first_name, msg.from.username);
+			break;
+
+		case '/help':
+			helpHandler(chatId);
+			break;
+
+		case '/settings':
+			settingsHandler(chatId, telegramUser);
+			break;
+
+		case 'world':
+			try {
+				worldResponse(chatId);
+			} catch (err) {
+				console.error(err);
+			}
+			break;
+
+		default:
+			try {
+				countryResponse(chatId, text);
+			} catch (err) {
+				console.error(err);
+			}
+			break;
 	}
 });
 

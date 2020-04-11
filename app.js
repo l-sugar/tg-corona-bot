@@ -24,6 +24,14 @@ app.listen(PORT, (req, res, next) => {
 
 - connect database
 - persist daily data in database (cron jobs)
+- add countries table to database
+- connect users with countries for daily report
+- let them set up daily reports in settings
+- create user class to populate when pulling info from database on first request
+- add caching with ttl 1 hour (node-cache) to persist user objects
+- enable multiple sources (JHU)
+- let user choose from different sources
+- clean up file struct and add debugging lines (DEBUG ENV var)
 - display historical data in the bot responses
 - create frontend to get the data via url
 

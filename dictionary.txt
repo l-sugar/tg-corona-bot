@@ -1,9 +1,0 @@
-async () => {
-	try {
-		let data = axios.get(coronaApiUrl);
-		let result = Object.keys(data.data);
-		return result;
-	} catch (err) {
-		console.error(err);
-	}
-}
